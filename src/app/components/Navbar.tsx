@@ -18,19 +18,21 @@ const Navbar: React.FC<NavbarProps> = ({
         <>
             <h1>Employee Dashboard</h1>
             <nav>
-                <Image
-                    src={'/logo.svg'}
-                    alt="logo"
-                    width={50}
-                    height={50}
-                    placeholder="blur"
-                    blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                        convertImage(700, 475)
-                    )}`}
-                />
+                <Link href="/employee">
+                    <Image
+                        src={'/logo.svg'}
+                        alt="logo"
+                        width={50}
+                        height={50}
+                        placeholder="blur"
+                        blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                            convertImage(700, 475)
+                        )}`}
+                    />
+                </Link>
+                <Link href="/employee/list">List</Link>
                 <Link href="/employee/add">Add</Link>
                 <Link href="/employee/edit">Edit</Link>
-                <Link href="/employee/list">View List</Link>
             </nav>
         </>
     );
