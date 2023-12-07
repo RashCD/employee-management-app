@@ -1,41 +1,61 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { convertImage, toBase64 } from "@/helpers/image";
+'use client';
 
-interface NavbarProps {
-    onAddEmployee?: () => void;
-    onEditEmployee?: () => void;
-    onViewEmployeeList?: () => void;
-}
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { convertImage, toBase64 } from '@/helpers/image';
+import { usePathname } from 'next/navigation';
 
-const Navbar: React.FC<NavbarProps> = ({
-    onAddEmployee,
-    onEditEmployee,
-    onViewEmployeeList,
-}) => {
-    return (
-        <>
-            <h1>Employee Dashboard</h1>
-            <nav>
-                <Link href="/employee">
-                    <Image
-                        src={'/logo.svg'}
-                        alt="logo"
-                        width={50}
-                        height={50}
-                        placeholder="blur"
-                        blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                            convertImage(700, 475)
-                        )}`}
-                    />
-                </Link>
-                <Link href="/employee/list">List</Link>
-                <Link href="/employee/add">Add</Link>
-                <Link href="/employee/edit">Edit</Link>
-            </nav>
-        </>
-    );
+const NavbarLink = [
+	{
+		name: 'List',
+		path: '/employee/list',
+	},
+	{
+		name: 'Add',
+		path: '/employee/add',
+	},
+	{
+		name: 'Edit',
+		path: '/employee/edit',
+	},
+];
+
+const Navbar = () => {
+	const pathname = usePathname();
+
+	return (
+		<>
+			<h1>Employee Dashboard</h1>
+			<nav>
+				<Link href="/employee">
+					<Image
+						src={'/logo.svg'}
+						alt="logo"
+						width={50}
+						height={50}
+						placeholder="blur"
+						blurDataURL={`data:image/svg+xml;base64,${toBase64(
+							convertImage(700, 475)
+						)}`}
+					/>
+				</Link>
+				{NavbarLink.map((link) => (
+					<Link
+						key={link.name}
+						href={link.path}
+						className={
+							pathname.includes(link.path)
+								? 'underline-offset-4'
+								: 'underline-offset-4 no-underline'
+						}
+					>
+						{link.name}
+					</Link>
+				))}
+			</nav>
+		</>
+	);
 };
 
 export default Navbar;
