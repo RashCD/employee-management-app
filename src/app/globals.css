@@ -41,7 +41,9 @@ nav {
     border-b-2 border-gray-200
     flex items-center gap-5 
     my-10 mx-auto 
-    max-w-5xl;
+    max-w-5xl
+    border-solid 
+    border-0;
 }
 nav a, nav span {
   @apply text-gray-500;

@@ -35,11 +35,7 @@ const structure = [
 const EmployeeList: React.FC = async () => {
 	const employees = await getEmployeeList();
 
-	return (
-		<main>
-			<EmployeeTable structure={structure} dataSources={employees} />
-		</main>
-	);
+	return <EmployeeTable structure={structure} dataSources={employees} />;
 };
 
 export default EmployeeList;
