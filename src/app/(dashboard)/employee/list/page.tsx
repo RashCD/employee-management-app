@@ -15,8 +15,18 @@ const structure = [
 	},
 	{
 		header: 'Name',
-		parentStyle: { width: '70%', textAlign: 'center' },
-		row: 'employee_name',
+		parentStyle: {
+			width: '70%',
+			textAlign: 'center',
+		},
+		customRow: (row: Employee) => (
+			//truncate to 25 characters
+			<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+				{row.employee_name.length > 25
+					? row.employee_name.slice(0, 25) + '...'
+					: row.employee_name}
+			</Box>
+		),
 	},
 	{
 		header: 'Age',
