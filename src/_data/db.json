@@ -10,8 +10,8 @@
     {
       "id": 2,
       "employee_name": "Jane Smith",
-      "employee_salary": 60000,
-      "employee_age": 35,
+      "employee_salary": "60000",
+      "employee_age": "36",
       "profile_image": "https://thispersondoesnotexist.com"
     },
     {
@@ -71,7 +71,7 @@
       "profile_image": "https://thispersondoesnotexist.com"
     },
     {
-      "employee_name": "test22",
+      "employee_name": "test 1",
       "employee_age": "11",
       "employee_salary": "11111111",
       "id": 11
@@ -95,7 +95,7 @@
       "id": 14
     },
     {
-      "employee_name": "test44",
+      "employee_name": "test51",
       "employee_age": "11",
       "employee_salary": "11111111",
       "id": 15
