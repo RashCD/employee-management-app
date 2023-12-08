@@ -10,7 +10,12 @@ export interface Employee {
 
 export const getEmployeeList = async (): Promise<Employee[]> => {
 	// const res = await fetch('http://dummy.restapiexample.com/api/v1/employees')
-	const res = await fetch('http://localhost:4000/employees');
+	const res = await fetch('http://localhost:4000/employees', {
+		next: {
+			tags: ['employee'],
+			revalidate: 0,
+		},
+	});
 
 	const result = await res.json();
 

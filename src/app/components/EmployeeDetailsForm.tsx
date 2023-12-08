@@ -4,8 +4,11 @@ import { Box, Stack, Typography, Button } from '@mui/material';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import CustomTextField from './CustomTextField';
+import { useRouter } from 'next/navigation';
+import { decamelizeKeys } from 'humps';
 
 export type EmployeeDetailsFormType = {
+	id?: number;
 	name: string;
 	age: string;
 	salary: string;
@@ -17,6 +20,7 @@ type EmployeeDetailsFormProps = {
 };
 
 const defaultValues: EmployeeDetailsFormType = {
+	id: undefined,
 	name: '',
 	age: '',
 	salary: '',
@@ -30,9 +34,30 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 		mode: 'onChange',
 		defaultValues: initialValues,
 	});
+	const router = useRouter();
 
-	const onSubmit = (data: EmployeeDetailsFormType) => {
-		console.log(data);
+	const onSubmit = async (data: EmployeeDetailsFormType) => {
+		const serverPayload = decamelizeKeys({
+			employeeName: data.name,
+			employeeAge: data.age,
+			employeeSalary: data.salary,
+		});
+
+		const res = await fetch(
+			`http://localhost:4000/employees/${initialValues.id}`,
+			{
+				method: data.id ? 'PATCH' : 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(serverPayload),
+				credentials: 'include',
+			}
+		);
+
+		if (res.status === 200 || res.status === 201) {
+			router.push('/employee/list');
+		}
 	};
 
 	return (
