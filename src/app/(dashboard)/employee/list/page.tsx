@@ -38,7 +38,7 @@ const structure = [
 	},
 	{
 		header: 'Actions',
-		customRow: () => <ActionButtons />,
+		customRow: (row: Employee) => <ActionButtons id={row.id} />,
 	},
 ];
 
