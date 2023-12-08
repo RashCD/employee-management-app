@@ -1,13 +1,24 @@
+'use client';
+
+import EmployeeDetailsForm from '@/app/components/EmployeeDetailsForm';
+import useEmployeeData from '@/hooks/useEmployeeData';
 import React from 'react';
 
-interface EditDetailProps {
-	params: {
-		id: string;
-	};
-}
+const EditDetailWithId = () => {
+	const employeeData = useEmployeeData();
 
-const EditDetail: React.FC<EditDetailProps> = ({ params }) => {
-	return <div>EditDetail {params.id} </div>;
+	return (
+		<>
+			<EmployeeDetailsForm
+				title="Edit Employee"
+				initialValues={{
+					name: employeeData.employeeName,
+					age: String(employeeData.employeeAge),
+					salary: String(employeeData.employeeSalary),
+				}}
+			/>
+		</>
+	);
 };
 
-export default EditDetail;
+export default EditDetailWithId;

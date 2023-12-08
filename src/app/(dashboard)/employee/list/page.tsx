@@ -9,7 +9,7 @@ const structure = [
 		header: 'Avatar',
 		customRow: (row: Employee) => (
 			<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-				<Avatar alt={row.employee_name} src={row.profile_image} />
+				<Avatar alt={row.employeeName} src={row.profileImage} />
 			</Box>
 		),
 	},
@@ -22,23 +22,23 @@ const structure = [
 		customRow: (row: Employee) => (
 			//truncate to 25 characters
 			<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-				{row.employee_name.length > 25
-					? row.employee_name.slice(0, 25) + '...'
-					: row.employee_name}
+				{row.employeeName.length > 25
+					? row.employeeName.slice(0, 25) + '...'
+					: row.employeeName}
 			</Box>
 		),
 	},
 	{
 		header: 'Age',
-		row: 'employee_age',
+		row: 'employeeAge',
 	},
 	{
 		header: 'Salary',
-		row: 'employee_salary',
+		row: 'employeeSalary',
 	},
 	{
 		header: 'Actions',
-		customRow: (row: Employee) => <ActionButtons id={row.id} />,
+		customRow: (row: Employee) => <ActionButtons employee={row} />,
 	},
 ];
 

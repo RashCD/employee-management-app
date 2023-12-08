@@ -11,14 +11,24 @@ export type EmployeeDetailsFormType = {
 	salary: string;
 };
 
-const EmployeeDetailsForm = () => {
+type EmployeeDetailsFormProps = {
+	title?: string;
+	initialValues?: EmployeeDetailsFormType;
+};
+
+const defaultValues: EmployeeDetailsFormType = {
+	name: '',
+	age: '',
+	salary: '',
+};
+
+const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
+	title = 'Add Employee',
+	initialValues = defaultValues,
+}) => {
 	const { control, handleSubmit } = useForm<EmployeeDetailsFormType>({
 		mode: 'onChange',
-		defaultValues: {
-			name: '',
-			age: '',
-			salary: '',
-		},
+		defaultValues: initialValues,
 	});
 
 	const onSubmit = (data: EmployeeDetailsFormType) => {
@@ -37,7 +47,7 @@ const EmployeeDetailsForm = () => {
 		>
 			<Stack sx={{ display: 'flex', alignItems: 'center' }}>
 				<Typography variant="h4" component="h1" gutterBottom>
-					Add Employee
+					{title}
 				</Typography>
 				<Controller
 					name="name"

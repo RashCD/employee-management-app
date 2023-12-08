@@ -5,12 +5,17 @@ import { Stack, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { useRouter } from 'next/navigation';
+import useEmployeeData from '@/hooks/useEmployeeData';
+import { Employee } from '../(dashboard)/employee/api';
 
-const ActionButtons = ({ id }: { id: number }) => {
+const ActionButtons = ({ employee }: { employee: Employee }) => {
 	const router = useRouter();
+	const { addEmployee } = useEmployeeData();
 
 	const handleEditClick = () => {
-		router.push(`/employee/edit/${id}`);
+		addEmployee(employee);
+
+		return router.push(`/employee/edit/${employee.id}`);
 	};
 
 	return (
