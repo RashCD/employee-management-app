@@ -19,20 +19,38 @@ const ActionButtons = ({ employee }: { employee: Employee }) => {
 		return router.push(`/employee/edit/${employee.id}`);
 	};
 
+	const handleDeleteClick = async () => {
+		const res = await fetch(`http://localhost:4000/employees/${employee.id}`, {
+			method: 'DELETE',
+			credentials: 'include',
+		});
+
+		if (res.status === 200 || res.status === 201) {
+			router.refresh();
+		}
+	};
+
 	return (
-		<Stack direction="row" spacing={2}>
-			<Button variant="outlined" color="error" startIcon={<DeleteIcon />}>
-				Delete
-			</Button>
-			<Button
-				variant="contained"
-				color="primary"
-				endIcon={<ModeEditIcon />}
-				onClick={handleEditClick}
-			>
-				Edit
-			</Button>
-		</Stack>
+		<>
+			<Stack direction="row" spacing={2}>
+				<Button
+					variant="outlined"
+					color="error"
+					startIcon={<DeleteIcon />}
+					onClick={handleDeleteClick}
+				>
+					Delete
+				</Button>
+				<Button
+					variant="contained"
+					color="primary"
+					endIcon={<ModeEditIcon />}
+					onClick={handleEditClick}
+				>
+					Edit
+				</Button>
+			</Stack>
+		</>
 	);
 };
 

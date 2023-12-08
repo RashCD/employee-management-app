@@ -49,7 +49,9 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 		});
 
 		const res = await fetch(
-			`http://localhost:4000/employees/${initialValues.id}`,
+			initialValues.id
+				? `http://localhost:4000/employees/${initialValues.id}`
+				: 'http://localhost:4000/employees',
 			{
 				method: data.id ? 'PATCH' : 'POST',
 				headers: {
@@ -62,6 +64,7 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 
 		if (res.status === 200 || res.status === 201) {
 			router.push('/employee/list');
+			router.refresh();
 		}
 	};
 

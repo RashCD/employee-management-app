@@ -66,39 +66,21 @@
     {
       "id": 10,
       "employee_name": "Ava Martinez Ava Martinez Ava Martinez Ava Martinez Ava Martinez Ava Martinez Ava Martinez Ava Martinez Ava Martinez Ava Martinez",
-      "employee_salary": 65000,
-      "employee_age": 33,
+      "employee_salary": "7000",
+      "employee_age": "33",
       "profile_image": "https://thispersondoesnotexist.com"
     },
     {
-      "employee_name": "test 1",
-      "employee_age": "11",
-      "employee_salary": "11111111",
+      "employee_name": "Test to delete",
+      "employee_age": "15",
+      "employee_salary": "20000",
       "id": 11
     },
     {
-      "employee_name": "test 3",
-      "employee_age": "11",
-      "employee_salary": "11111111",
+      "employee_name": "Hello World",
+      "employee_age": "99",
+      "employee_salary": "1000999",
       "id": 12
-    },
-    {
-      "employee_name": "test22",
-      "employee_age": "11",
-      "employee_salary": "11111111",
-      "id": 13
-    },
-    {
-      "employee_name": "John Doe",
-      "employee_age": "31",
-      "employee_salary": "50000",
-      "id": 14
-    },
-    {
-      "employee_name": "test51",
-      "employee_age": "11",
-      "employee_salary": "11111111",
-      "id": 15
     }
   ]
 }
