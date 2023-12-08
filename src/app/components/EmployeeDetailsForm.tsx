@@ -1,7 +1,7 @@
 'use client';
 
 import { Box, Stack, Typography, Button } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import CustomTextField from './CustomTextField';
 import { useRouter } from 'next/navigation';
@@ -30,11 +30,16 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 	title = 'Add Employee',
 	initialValues = defaultValues,
 }) => {
-	const { control, handleSubmit } = useForm<EmployeeDetailsFormType>({
+	const { control, handleSubmit, reset } = useForm<EmployeeDetailsFormType>({
 		mode: 'onChange',
-		defaultValues: initialValues,
+		defaultValues,
 	});
+
 	const router = useRouter();
+
+	useEffect(() => {
+		reset(initialValues);
+	}, [initialValues, reset]);
 
 	const onSubmit = async (data: EmployeeDetailsFormType) => {
 		const serverPayload = decamelizeKeys({

@@ -10,6 +10,7 @@ import { Employee } from '../(dashboard)/employee/api';
 
 const ActionButtons = ({ employee }: { employee: Employee }) => {
 	const router = useRouter();
+
 	const { addEmployee } = useEmployeeData();
 
 	const handleEditClick = () => {

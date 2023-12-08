@@ -1,20 +1,32 @@
 'use client';
 
 import EmployeeDetailsForm from '@/app/components/EmployeeDetailsForm';
-import { Box, Stack, TextField } from '@mui/material';
+import { Box, Button, Stack, TextField } from '@mui/material';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
 import { Employee } from '../api';
 
 const EditDetail = ({ employee }: { employee: Employee }) => {
 	const router = useRouter();
+
 	const pathname = usePathname();
+
 	const searchParams = useSearchParams();
 
+	const [searchId, setSearchId] = useState(searchParams.get('id') ?? '');
+
 	const handleSearchIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchId(event.target.value);
+	};
+
+	const handleSearchOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event?.preventDefault();
+
 		const current = new URLSearchParams(Array.from(searchParams.entries()));
 
-		current.set('id', event.target.value);
+		if (searchId) {
+			current.set('id', searchId);
+		}
 
 		const search = current.toString();
 
@@ -32,14 +44,18 @@ const EditDetail = ({ employee }: { employee: Employee }) => {
 				}}
 				noValidate
 				autoComplete="off"
+				onSubmit={handleSearchOnSubmit}
 			>
 				<Stack>
 					<TextField
-						label="Search for Employee ID"
+						label="Employee ID"
 						type="number"
 						onChange={handleSearchIdChange}
-						value={searchParams.get('id') ?? ''}
+						value={searchId}
 					/>
+					<Button variant="contained" color="primary" type="submit">
+						Search
+					</Button>
 				</Stack>
 			</Box>
 			{employee.id && (

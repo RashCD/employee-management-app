@@ -7,6 +7,7 @@ import React from 'react';
 
 const EditDetailWithId = () => {
 	const employeeData = useEmployeeData();
+
 	const params = useParams();
 
 	return (
