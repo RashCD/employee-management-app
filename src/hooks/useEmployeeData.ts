@@ -1,4 +1,4 @@
-import { Employee } from '@/app/(dashboard)/employee/api';
+import { Employee } from '@/app/[lng]/(dashboard)/employee/api';
 import { create } from 'zustand';
 
 type EmployeeDataActions = {

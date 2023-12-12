@@ -6,7 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { useRouter } from 'next/navigation';
 import { useEmployeeData } from '@/hooks/useEmployeeData';
-import { Employee } from '../(dashboard)/employee/api';
+import { Employee } from '../[lng]/(dashboard)/employee/api';
 
 const ActionButtons = ({ employee }: { employee: Employee }) => {
 	const router = useRouter();
