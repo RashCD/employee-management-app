@@ -6,6 +6,7 @@ import { Controller, useForm } from 'react-hook-form';
 import CustomTextField from './CustomTextField';
 import { useRouter } from 'next/navigation';
 import { decamelizeKeys } from 'humps';
+import CustomUploadField from './CustomUploadField';
 
 export type EmployeeDetailsFormType = {
 	id?: number;
@@ -84,7 +85,7 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 					name="avatar"
 					control={control}
 					render={({ field, fieldState }) => (
-						<CustomTextField
+						<CustomUploadField
 							{...field}
 							error={fieldState.invalid}
 							errorMessage={fieldState.error?.message}
@@ -141,7 +142,7 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 							message: 'Email is required',
 						},
 						pattern: {
-							value: /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/,
+							value: /\S+@\S+\.\S+/,
 							message: 'Email must be a valid email',
 						},
 					}}
