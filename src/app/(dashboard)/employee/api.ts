@@ -1,16 +1,29 @@
-import camelize from 'camelize';
+import { camelizeKeys } from 'humps';
+
+export interface Users {
+	page: number;
+	perPage: number;
+	total: number;
+	totalPages: number;
+	data: Employee[];
+	support: Support;
+}
 
 export interface Employee {
 	id: number;
-	employeeName: string;
-	employeeSalary: number;
-	employeeAge: number;
-	profileImage: string;
+	email: string;
+	firstName: string;
+	lastName: string;
+	avatar: string;
 }
 
-export const getEmployeeList = async (): Promise<Employee[]> => {
-	// const res = await fetch('http://dummy.restapiexample.com/api/v1/employees')
-	const res = await fetch('http://localhost:4000/employees', {
+export interface Support {
+	url: string;
+	text: string;
+}
+
+export const getEmployeeList = async (): Promise<Users> => {
+	const res = await fetch('https://reqres.in/api/users', {
 		next: {
 			revalidate: 0,
 		},
@@ -18,7 +31,7 @@ export const getEmployeeList = async (): Promise<Employee[]> => {
 
 	const result = await res.json();
 
-	const camelizedResult = camelize(result);
+	const camelizedResult = camelizeKeys<Users>(result);
 
 	return camelizedResult;
 };

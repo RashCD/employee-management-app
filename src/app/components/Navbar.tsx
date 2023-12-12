@@ -19,6 +19,10 @@ const NavbarLink = [
 		name: 'Edit',
 		path: '/employee/edit',
 	},
+	{
+		name: 'Search',
+		path: '/employee/search',
+	},
 ];
 
 const Navbar = () => {

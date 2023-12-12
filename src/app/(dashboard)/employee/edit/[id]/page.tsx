@@ -1,7 +1,7 @@
 'use client';
 
 import EmployeeDetailsForm from '@/app/components/EmployeeDetailsForm';
-import useEmployeeData from '@/hooks/useEmployeeData';
+import { useEmployeeData } from '@/hooks/useEmployeeData';
 import { useParams } from 'next/navigation';
 import React from 'react';
 
@@ -16,9 +16,10 @@ const EditDetailWithId = () => {
 				title="Edit Employee"
 				initialValues={{
 					id: +params.id,
-					name: employeeData.employeeName,
-					age: String(employeeData.employeeAge),
-					salary: String(employeeData.employeeSalary),
+					firstName: employeeData.firstName,
+					lastName: employeeData.lastName,
+					email: employeeData.email,
+					avatar: employeeData.avatar,
 				}}
 			/>
 		</>

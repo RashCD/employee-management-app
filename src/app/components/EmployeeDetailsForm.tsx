@@ -9,9 +9,10 @@ import { decamelizeKeys } from 'humps';
 
 export type EmployeeDetailsFormType = {
 	id?: number;
-	name: string;
-	age: string;
-	salary: string;
+	firstName: string;
+	lastName: string;
+	email: string;
+	avatar: string;
 };
 
 type EmployeeDetailsFormProps = {
@@ -21,9 +22,10 @@ type EmployeeDetailsFormProps = {
 
 const defaultValues: EmployeeDetailsFormType = {
 	id: undefined,
-	name: '',
-	age: '',
-	salary: '',
+	firstName: '',
+	lastName: '',
+	email: '',
+	avatar: '',
 };
 
 const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
@@ -42,16 +44,12 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 	}, [initialValues, reset]);
 
 	const onSubmit = async (data: EmployeeDetailsFormType) => {
-		const serverPayload = decamelizeKeys({
-			employeeName: data.name,
-			employeeAge: data.age,
-			employeeSalary: data.salary,
-		});
+		const serverPayload = decamelizeKeys(data);
 
 		const res = await fetch(
 			initialValues.id
-				? `http://localhost:4000/employees/${initialValues.id}`
-				: 'http://localhost:4000/employees',
+				? `https://reqres.in/api/users/${initialValues.id}`
+				: 'https://reqres.in/api/users',
 			{
 				method: data.id ? 'PATCH' : 'POST',
 				headers: {
@@ -83,7 +81,18 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 					{title}
 				</Typography>
 				<Controller
-					name="name"
+					name="avatar"
+					control={control}
+					render={({ field, fieldState }) => (
+						<CustomTextField
+							{...field}
+							error={fieldState.invalid}
+							errorMessage={fieldState.error?.message}
+						/>
+					)}
+				/>
+				<Controller
+					name="firstName"
 					control={control}
 					render={({ field, fieldState }) => (
 						<CustomTextField
@@ -95,12 +104,12 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 					rules={{
 						required: {
 							value: true,
-							message: 'Name is required',
+							message: 'First name is required',
 						},
 					}}
 				/>
 				<Controller
-					name="age"
+					name="lastName"
 					control={control}
 					render={({ field, fieldState }) => (
 						<CustomTextField
@@ -112,49 +121,32 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 					rules={{
 						required: {
 							value: true,
-							message: 'Age is required',
+							message: 'Last name is required',
 						},
-						min: {
-							value: 1,
-							message: 'Age must be greater than 0',
+					}}
+				/>
+				<Controller
+					name="email"
+					control={control}
+					render={({ field, fieldState }) => (
+						<CustomTextField
+							{...field}
+							error={fieldState.invalid}
+							errorMessage={fieldState.error?.message}
+						/>
+					)}
+					rules={{
+						required: {
+							value: true,
+							message: 'Email is required',
 						},
 						pattern: {
-							value: /^[0-9]*$/,
-							message: 'Age must be a number',
-						},
-						max: {
-							value: 100,
-							message: 'Age must be less than 100',
+							value: /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/,
+							message: 'Email must be a valid email',
 						},
 					}}
 				/>
-				<Controller
-					name="salary"
-					control={control}
-					render={({ field, fieldState }) => (
-						<CustomTextField
-							{...field}
-							error={fieldState.invalid}
-							errorMessage={fieldState.error?.message}
-						/>
-					)}
-					rules={{
-						required: {
-							value: true,
-							message: 'Salary is required',
-						},
-						min: {
-							value: 1,
-							message: 'Salary must be greater than 0',
-						},
-						validate: {
-							isNumber: (value) => !isNaN(+value) || 'Salary must be a number',
-							noDecimal: (value) =>
-								!value.includes('.') ||
-								'Salary must not have any decimal places',
-						},
-					}}
-				/>
+
 				<Button variant="contained" type="submit" sx={{ mt: 2 }}>
 					Submit
 				</Button>

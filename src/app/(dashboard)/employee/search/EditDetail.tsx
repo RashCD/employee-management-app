@@ -1,19 +1,19 @@
 'use client';
 
-import EmployeeDetailsForm from '@/app/components/EmployeeDetailsForm';
 import { Box, Button, Stack, TextField } from '@mui/material';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { Employee } from '../api';
+import { useEmployeeData } from '@/hooks/useEmployeeData';
 
-const EditDetail = ({ employee }: { employee: Employee }) => {
+const EditDetail = ({ employees }: { employees: Employee[] }) => {
 	const router = useRouter();
 
-	const pathname = usePathname();
+	const { addEmployee } = useEmployeeData();
 
-	const searchParams = useSearchParams();
+	const [searchId, setSearchId] = useState('');
 
-	const [searchId, setSearchId] = useState(searchParams.get('id') ?? '');
+	const [, setError] = useState();
 
 	const handleSearchIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchId(event.target.value);
@@ -22,17 +22,19 @@ const EditDetail = ({ employee }: { employee: Employee }) => {
 	const handleSearchOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event?.preventDefault();
 
-		const current = new URLSearchParams(Array.from(searchParams.entries()));
+		const findEmployee = employees.find(
+			(employee) => employee.id === Number(searchId)
+		);
 
-		if (searchId) {
-			current.set('id', searchId);
+		if (findEmployee) {
+			addEmployee(findEmployee);
+		} else {
+			setError(() => {
+				throw new Error('Employee not found');
+			});
 		}
 
-		const search = current.toString();
-
-		const query = search ? `?${search}` : '';
-
-		router.push(`${pathname}${query}`);
+		router.push(`/employee/edit/${searchId}`);
 	};
 
 	return (
@@ -58,17 +60,6 @@ const EditDetail = ({ employee }: { employee: Employee }) => {
 					</Button>
 				</Stack>
 			</Box>
-			{employee.id && (
-				<EmployeeDetailsForm
-					title="Edit Employee"
-					initialValues={{
-						id: employee.id,
-						name: employee.employeeName,
-						age: String(employee.employeeAge),
-						salary: String(employee.employeeSalary),
-					}}
-				/>
-			)}
 		</>
 	);
 };

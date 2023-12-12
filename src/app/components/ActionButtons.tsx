@@ -5,7 +5,7 @@ import { Stack, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { useRouter } from 'next/navigation';
-import useEmployeeData from '@/hooks/useEmployeeData';
+import { useEmployeeData } from '@/hooks/useEmployeeData';
 import { Employee } from '../(dashboard)/employee/api';
 
 const ActionButtons = ({ employee }: { employee: Employee }) => {
@@ -20,7 +20,7 @@ const ActionButtons = ({ employee }: { employee: Employee }) => {
 	};
 
 	const handleDeleteClick = async () => {
-		const res = await fetch(`http://localhost:4000/employees/${employee.id}`, {
+		const res = await fetch(`https://reqres.in/api/users/${employee.id}`, {
 			method: 'DELETE',
 			credentials: 'include',
 		});
