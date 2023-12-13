@@ -27,7 +27,7 @@ export function middleware(request: NextRequest) {
 
 		// Redirect to '/employee' if the user goes to '/'
 		if (pathname === '/') {
-			return NextResponse.redirect(new URL(`/${locale}/employee`, request.url));
+			return NextResponse.redirect(new URL(`/employee`, request.url));
 		}
 
 		return NextResponse.redirect(
