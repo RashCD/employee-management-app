@@ -86,7 +86,8 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 					control={control}
 					render={({ field, fieldState }) => (
 						<CustomUploadField
-							{...field}
+							customRef={field.ref}
+							value={field.value}
 							error={fieldState.invalid}
 							errorMessage={fieldState.error?.message}
 						/>

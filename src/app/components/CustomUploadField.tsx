@@ -1,4 +1,6 @@
-import { Button, Avatar, styled, Stack, Typography } from '@mui/material';
+'use client';
+
+import { Button, Avatar, Stack, Typography, styled } from '@mui/material';
 import React from 'react';
 
 const VisuallyHiddenInput = styled('input')({
@@ -14,12 +16,14 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 type CustomUploadFieldProps = {
+	customRef: React.Ref<HTMLInputElement>;
 	value: string;
 	error: boolean;
 	errorMessage?: string;
 };
 
 const CustomUploadField = ({
+	customRef,
 	value,
 	error,
 	errorMessage,
@@ -37,7 +41,7 @@ const CustomUploadField = ({
 		>
 			<Stack>
 				<Avatar src={value} sx={{ my: 1, width: 56, height: 56 }} />
-				<VisuallyHiddenInput type="file" />
+				<VisuallyHiddenInput ref={customRef} type="file" />
 				<Typography variant="body2" sx={{ textAlign: 'center', opacity: 0 }}>
 					Upload
 				</Typography>
