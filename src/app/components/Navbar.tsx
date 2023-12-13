@@ -5,36 +5,49 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { convertImage, toBase64 } from '@/helpers/image';
 import { usePathname } from 'next/navigation';
+import logo from '@/app/assets/logo.svg';
+import { Locale } from '@/i18n.config';
 
-const NavbarLink = [
-	{
-		name: 'List',
-		path: '/employee/list',
-	},
-	{
-		name: 'Add',
-		path: '/employee/add',
-	},
-	{
-		name: 'Edit',
-		path: '/employee/edit',
-	},
-	{
-		name: 'Search',
-		path: '/employee/search',
-	},
-];
+type NavbarProps = {
+	lang: Locale;
+	navbar: {
+		title: string;
+		add: string;
+		list: string;
+		edit: string;
+		search: string;
+	};
+};
 
-const Navbar = () => {
+const Navbar = ({ navbar, lang }: NavbarProps) => {
 	const pathname = usePathname();
+
+	const NavbarLink = [
+		{
+			name: navbar.list,
+			path: `/${lang}/employee/list`,
+		},
+		{
+			name: navbar.add,
+			path: `/${lang}/employee/add`,
+		},
+		{
+			name: navbar.edit,
+			path: `/${lang}/employee/edit`,
+		},
+		{
+			name: navbar.search,
+			path: `/${lang}/employee/search`,
+		},
+	];
 
 	return (
 		<>
-			<h1>Employee Dashboard</h1>
+			<h1>{navbar.title}</h1>
 			<nav>
-				<Link href="/employee">
+				<Link href={`/${lang}/employee`}>
 					<Image
-						src={'/logo.svg'}
+						src={logo}
 						alt="logo"
 						width={50}
 						height={50}

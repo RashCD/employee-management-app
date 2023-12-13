@@ -1,0 +1,22 @@
+{
+    "page": {
+        "home": {
+            "title": "Papan Pemuka Pekerja",
+            "dashboard": "Papan pemuka",
+            "dashboardDesc": "Aplikasi papan pemuka pekerja menawarkan penyelesaian menyeluruh bagi pengurusan tugas, memudahkan komunikasi yang lancar, dan menjejaki kemajuan. Ia menyusun alur kerja dengan baik, membolehkan koordinasi yang lancar di antara ahli pasukan sambil menyediakan kemaskini secara waktu nyata. Dengan ciri-ciri yang intuitif dan antara muka yang mesra pengguna, ia menyederhanakan akses kepada data penting dan meningkatkan produktiviti. Aplikasi ini memberdayakan pekerja untuk berkolaborasi secara berkesan, mengutamakan tugasan, dan mencapai matlamat organisasi secara cekap. Melalui fungsi-fungsi yang kukuh, ia memastikan platform terpusat untuk memantau prestasi, menganalisis trend, dan mengoptimumkan proses alur kerja.",
+            "viewList": "Lihat Senarai Pekerja",
+            "companyUpdate": "Kemaskini Syarikat",
+            "newMember": "Ahli baru dari team Web Dev",
+            "newMemberDesc": "Penambahan baru kepada pasukan pembangunan web membawa perspektif dan kepakaran baru. Kedatangan mereka meningkatkan set kemahiran kolektif, menyumbang pandangan berharga dan semangat kolaboratif. Dengan dedikasi kepada inovasi dan pemahaman yang mendalam tentang trend semasa, kehadiran mereka memperkayakan dinamik pasukan. Komitmen anggota baru ini kepada kecemerlangan selari dengan objektif pasukan, memupuk persekitaran pertumbuhan dan kecekapan.",
+            "newWebsite": "Laman web baru telah dilancarkan!",
+            "newWebsiteDesc": "Website baru kini dilancarkan! Kerja keras dan dedikasi pasukan telah membuahkan hasil, dan laman web kini boleh dilihat oleh orang ramai. Pelancaran laman web menandakan tonggak penting bagi syarikat, dan pasukan berasa gembira untuk berkongsi usaha mereka dengan dunia. Reka bentuk dan fungsi laman web mencerminkan komitmen pasukan kepada kecemerlangan, dan pasukan yakin bahawa ia akan menjadi sumber yang berharga untuk pelanggan dan pekerja."
+        },
+        "navbar": {
+            "title": "Papan Pemuka Pekerja",
+            "add": "Tambah",
+            "list": "Senarai",
+            "edit": "Sunting",
+            "search": "Carian"
+        }
+    }
+}

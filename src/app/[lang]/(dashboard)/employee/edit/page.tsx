@@ -1,18 +1,19 @@
 'use client';
 
+import { Locale } from '@/i18n.config';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 const Page = () => {
-	const { id } = useParams<{ id: string }>();
+	const { id, lang } = useParams<{ id: string; lang: Locale }>();
 
 	const router = useRouter();
 
 	useEffect(() => {
 		if (!id) {
-			router.push('/employee/search');
+			router.push(`/${lang}/employee/search`);
 		}
-	}, [id, router]);
+	}, [id, lang, router]);
 
 	return;
 };

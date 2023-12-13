@@ -1,0 +1,22 @@
+{
+    "page": {
+        "home": {
+            "title": "Employee Dashboard",
+            "dashboard": "Dashboard",
+            "dashboardDesc": "The employee dashboard app offers a comprehensive solution for managing tasks, facilitating seamless communication, and tracking progress. It streamlines workflows, enabling effortless coordination among team members while providing real-time updates. With intuitive features and user-friendly interfaces, it simplifies access to essential data and enhances productivity. The app empowers employees to collaborate effectively, prioritize assignments, and achieve organizational goals efficiently. Through its robust functionalities, it ensures a centralized platform for monitoring performance, analyzing trends, and optimizing workflow processes.",
+            "viewList": "View Employee List",
+            "companyUpdate": "Company Update",
+            "newMember": "New member of the web dev team",
+            "newMemberDesc": "A new addition to the web development team brings fresh perspectives and expertise. Their arrival enhances the collective skill set, contributing valuable insights and a collaborative spirit. With a dedication to innovation and a keen understanding of current trends, their presence enriches the team dynamic. This new member's commitment to excellence aligns seamlessly with the team's objectives, fostering an environment of growth and proficiency.",
+            "newWebsite": "New website live!",
+            "newWebsiteDesc": "The new website is now live! The team's hard work and dedication have paid off, and the website is now available for public viewing. The website's launch marks a significant milestone for the company, and the team is excited to share their efforts with the world. The website's design and functionality reflect the team's commitment to excellence, and the team is confident that it will be a valuable resource for customers and employees alike."
+        },
+        "navbar": { 
+            "title": "Employee Dashboard",
+            "add": "Add",
+            "list": "List",
+            "edit": "Edit",
+            "search": "Search"
+        }
+    }
+}

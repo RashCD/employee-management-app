@@ -10,7 +10,7 @@ import {
 	SxProps,
 	Theme,
 } from '@mui/material';
-import { Employee } from '../[lng]/(dashboard)/employee/api';
+import { Employee } from '../[lang]/(dashboard)/employee/api';
 
 type Structure =
 	| {
