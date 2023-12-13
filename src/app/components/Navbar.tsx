@@ -10,7 +10,7 @@ import { Locale } from '@/i18n.config';
 
 type NavbarProps = {
 	lang: Locale;
-	navbar: {
+	translate: {
 		title: string;
 		add: string;
 		list: string;
@@ -19,31 +19,31 @@ type NavbarProps = {
 	};
 };
 
-const Navbar = ({ navbar, lang }: NavbarProps) => {
+const Navbar = ({ translate, lang }: NavbarProps) => {
 	const pathname = usePathname();
 
 	const NavbarLink = [
 		{
-			name: navbar.list,
+			name: translate.list,
 			path: `/${lang}/employee/list`,
 		},
 		{
-			name: navbar.add,
+			name: translate.add,
 			path: `/${lang}/employee/add`,
 		},
 		{
-			name: navbar.edit,
+			name: translate.edit,
 			path: `/${lang}/employee/edit`,
 		},
 		{
-			name: navbar.search,
+			name: translate.search,
 			path: `/${lang}/employee/search`,
 		},
 	];
 
 	return (
 		<>
-			<h1>{navbar.title}</h1>
+			<h1>{translate.title}</h1>
 			<nav>
 				<Link href={`/${lang}/employee`}>
 					<Image

@@ -5,8 +5,18 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { Employee } from '../api';
 import { useEmployeeData } from '@/hooks/useEmployeeData';
+import { Locale } from '@/i18n.config';
 
-const EditDetail = ({ employees }: { employees: Employee[] }) => {
+type EditDetailProps = {
+	employees: Employee[];
+	lang: Locale;
+	translate: {
+		id: string;
+		search: string;
+	};
+};
+
+const EditDetail = ({ employees, lang, translate }: EditDetailProps) => {
 	const router = useRouter();
 
 	const { addEmployee } = useEmployeeData();
@@ -34,7 +44,7 @@ const EditDetail = ({ employees }: { employees: Employee[] }) => {
 			});
 		}
 
-		router.push(`/employee/edit/${searchId}`);
+		router.push(`/${lang}/employee/edit/${searchId}`);
 	};
 
 	return (
@@ -50,13 +60,13 @@ const EditDetail = ({ employees }: { employees: Employee[] }) => {
 			>
 				<Stack>
 					<TextField
-						label="Employee ID"
+						label={translate.id}
 						type="number"
 						onChange={handleSearchIdChange}
 						value={searchId}
 					/>
 					<Button variant="contained" color="primary" type="submit">
-						Search
+						{translate.search}
 					</Button>
 				</Stack>
 			</Box>

@@ -1,29 +1,18 @@
-'use client';
-
-import EmployeeDetailsForm from '@/app/components/EmployeeDetailsForm';
-import { useEmployeeData } from '@/hooks/useEmployeeData';
-import { useParams } from 'next/navigation';
 import React from 'react';
+import EditDetailWithId from './EditDetailWithId';
+import { Locale } from '@/i18n.config';
+import { getDictionary } from '@/lib/dictionary';
 
-const EditDetailWithId = () => {
-	const employeeData = useEmployeeData();
-
-	const params = useParams();
-
-	return (
-		<>
-			<EmployeeDetailsForm
-				title="Edit Employee"
-				initialValues={{
-					id: +params.id,
-					firstName: employeeData.firstName,
-					lastName: employeeData.lastName,
-					email: employeeData.email,
-					avatar: employeeData.avatar,
-				}}
-			/>
-		</>
-	);
+type PageProps = {
+	params: {
+		lang: Locale;
+	};
 };
 
-export default EditDetailWithId;
+const Page = async ({ params }: PageProps) => {
+	const { page } = await getDictionary(params.lang);
+
+	return <EditDetailWithId translate={page.form} />;
+};
+
+export default Page;

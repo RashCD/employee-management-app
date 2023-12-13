@@ -8,18 +8,31 @@ import { useRouter } from 'next/navigation';
 import { decamelizeKeys } from 'humps';
 import CustomUploadField from './CustomUploadField';
 
-export type EmployeeDetailsFormType = {
-	id?: number;
-	firstName: string;
-	lastName: string;
-	email: string;
-	avatar: string;
+type TranslateType = {
+	title: string;
+	submit: string;
+	upload: string;
+	field: {
+		avatar: string;
+		firstName: string;
+		lastName: string;
+		email: string;
+	};
+	validation: {
+		required: string;
+		email: string;
+	};
 };
 
 type EmployeeDetailsFormProps = {
 	title?: string;
 	initialValues?: EmployeeDetailsFormType;
+	translate: TranslateType;
 };
+
+export type EmployeeDetailsFormType = {
+	id?: number;
+} & TranslateType['field'];
 
 const defaultValues: EmployeeDetailsFormType = {
 	id: undefined,
@@ -29,10 +42,10 @@ const defaultValues: EmployeeDetailsFormType = {
 	avatar: '',
 };
 
-const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
-	title = 'Add Employee',
+const EmployeeDetailsForm = ({
 	initialValues = defaultValues,
-}) => {
+	translate,
+}: EmployeeDetailsFormProps) => {
 	const { control, handleSubmit, reset } = useForm<EmployeeDetailsFormType>({
 		mode: 'onChange',
 		defaultValues,
@@ -79,7 +92,7 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 		>
 			<Stack sx={{ display: 'flex', alignItems: 'center' }}>
 				<Typography variant="h4" component="h1" gutterBottom>
-					{title}
+					{translate?.title || 'Employee Form'}
 				</Typography>
 				<Controller
 					name="avatar"
@@ -90,6 +103,7 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 							value={field.value}
 							error={fieldState.invalid}
 							errorMessage={fieldState.error?.message}
+							translate={{ upload: translate?.upload || 'Upload' }}
 						/>
 					)}
 				/>
@@ -99,6 +113,7 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 					render={({ field, fieldState }) => (
 						<CustomTextField
 							{...field}
+							label={translate?.field.firstName || 'First Name'}
 							error={fieldState.invalid}
 							errorMessage={fieldState.error?.message}
 						/>
@@ -106,7 +121,8 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 					rules={{
 						required: {
 							value: true,
-							message: 'First name is required',
+							message:
+								translate?.validation.required || 'First name is required',
 						},
 					}}
 				/>
@@ -116,6 +132,7 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 					render={({ field, fieldState }) => (
 						<CustomTextField
 							{...field}
+							label={translate?.field.lastName || 'Last Name'}
 							error={fieldState.invalid}
 							errorMessage={fieldState.error?.message}
 						/>
@@ -123,7 +140,8 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 					rules={{
 						required: {
 							value: true,
-							message: 'Last name is required',
+							message:
+								translate?.validation.required || 'Last name is required',
 						},
 					}}
 				/>
@@ -133,6 +151,7 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 					render={({ field, fieldState }) => (
 						<CustomTextField
 							{...field}
+							label={translate?.field.email || 'Email'}
 							error={fieldState.invalid}
 							errorMessage={fieldState.error?.message}
 						/>
@@ -140,17 +159,17 @@ const EmployeeDetailsForm: React.FC<EmployeeDetailsFormProps> = ({
 					rules={{
 						required: {
 							value: true,
-							message: 'Email is required',
+							message: translate?.validation.required || 'Email is required',
 						},
 						pattern: {
 							value: /\S+@\S+\.\S+/,
-							message: 'Email must be a valid email',
+							message: translate?.validation.email || 'Email is invalid',
 						},
 					}}
 				/>
 
 				<Button variant="contained" type="submit" sx={{ mt: 2 }}>
-					Submit
+					{translate?.submit || 'Submit'}
 				</Button>
 			</Stack>
 		</Box>

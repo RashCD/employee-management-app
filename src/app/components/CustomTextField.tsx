@@ -5,6 +5,7 @@ import React from 'react';
 import { EmployeeDetailsFormType } from './EmployeeDetailsForm';
 
 type CustomTextFieldProps = {
+	label: string;
 	name: keyof EmployeeDetailsFormType;
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	value: string;
@@ -15,11 +16,11 @@ type CustomTextFieldProps = {
 const CustomTextField = React.forwardRef<
 	HTMLInputElement,
 	CustomTextFieldProps
->(({ name, onChange, value, error, errorMessage }, ref) => {
+>(({ label, name, onChange, value, error, errorMessage }, ref) => {
 	return (
 		<TextField
 			ref={ref}
-			label={name.charAt(0).toUpperCase() + name.slice(1)}
+			label={label}
 			name={name}
 			onChange={onChange}
 			value={value}

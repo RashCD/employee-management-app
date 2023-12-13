@@ -7,8 +7,18 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { useRouter } from 'next/navigation';
 import { useEmployeeData } from '@/hooks/useEmployeeData';
 import { Employee } from '../[lang]/(dashboard)/employee/api';
+import { Locale } from '@/i18n.config';
 
-const ActionButtons = ({ employee }: { employee: Employee }) => {
+type ActionButtonsProps = {
+	employee: Employee;
+	lang: Locale;
+	translate: {
+		edit: string;
+		delete: string;
+	};
+};
+
+const ActionButtons = ({ employee, lang, translate }: ActionButtonsProps) => {
 	const router = useRouter();
 
 	const { addEmployee } = useEmployeeData();
@@ -16,7 +26,7 @@ const ActionButtons = ({ employee }: { employee: Employee }) => {
 	const handleEditClick = () => {
 		addEmployee(employee);
 
-		return router.push(`/employee/edit/${employee.id}`);
+		return router.push(`/${lang}/employee/edit/${employee.id}`);
 	};
 
 	const handleDeleteClick = async () => {
@@ -39,7 +49,7 @@ const ActionButtons = ({ employee }: { employee: Employee }) => {
 					startIcon={<DeleteIcon />}
 					onClick={handleDeleteClick}
 				>
-					Delete
+					{translate.delete}
 				</Button>
 				<Button
 					variant="contained"
@@ -47,7 +57,7 @@ const ActionButtons = ({ employee }: { employee: Employee }) => {
 					endIcon={<ModeEditIcon />}
 					onClick={handleEditClick}
 				>
-					Edit
+					{translate.edit}
 				</Button>
 			</Stack>
 		</>

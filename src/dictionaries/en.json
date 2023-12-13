@@ -17,6 +17,35 @@
             "list": "List",
             "edit": "Edit",
             "search": "Search"
+        },
+        "form": {
+            "title": "Employee Form",
+            "submit": "Submit",
+            "upload": "Upload",
+            "field": {
+                "avatar": "Avatar",
+                "firstName": "First Name",
+                "lastName": "Last Name",
+                "email": "Email",
+                "submit": "Submit"
+            },
+            "validation": {
+                "required": "This field is required.",
+                "email": "Please enter a valid email address."
+            }
+        },
+        "employee": {
+            "id": "Employee ID",
+            "search": "Search"
+        },
+        "table": {
+            "avatar": "Avatar",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "email": "Email",
+            "action": "Action",
+            "edit": "Edit",
+            "delete": "Delete"
         }
     }
 }

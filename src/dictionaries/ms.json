@@ -17,6 +17,35 @@
             "list": "Senarai",
             "edit": "Sunting",
             "search": "Carian"
+        },
+        "form": {
+            "title": "Borang Pekerja",
+            "submit": "Hantar", 
+            "upload": "Muat naik",
+            "field": {
+                "avatar": "Avatar",
+                "firstName": "Nama Pertama",
+                "lastName": "Nama Akhir",
+                "email": "Email",
+                "submit": "Hantar"
+            },
+            "validation": {
+                "required": "Ruangan ini diperlukan",
+                "email": "Sila masukkan alamat e-mel yang sah"
+            }
+        },
+        "employee": {
+            "id": "ID Pekerja",
+            "search": "Carian"
+        },
+        "table": {
+            "avatar": "Avatar",
+            "firstName": "Nama Pertama",
+            "lastName": "Nama Akhir",
+            "email": "Email",
+            "action": "Tindakan",
+            "edit": "Sunting",
+            "delete": "Padam"
         }
     }
 }

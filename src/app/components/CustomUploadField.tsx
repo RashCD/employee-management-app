@@ -20,6 +20,9 @@ type CustomUploadFieldProps = {
 	value: string;
 	error: boolean;
 	errorMessage?: string;
+	translate: {
+		upload: string;
+	};
 };
 
 const CustomUploadField = ({
@@ -27,6 +30,7 @@ const CustomUploadField = ({
 	value,
 	error,
 	errorMessage,
+	translate,
 }: CustomUploadFieldProps) => {
 	return (
 		<Button
@@ -43,7 +47,7 @@ const CustomUploadField = ({
 				<Avatar src={value} sx={{ my: 1, width: 56, height: 56 }} />
 				<VisuallyHiddenInput ref={customRef} type="file" />
 				<Typography variant="body2" sx={{ textAlign: 'center', opacity: 0 }}>
-					Upload
+					{translate.upload}
 				</Typography>
 				{error ? <p>{errorMessage}</p> : null}
 			</Stack>

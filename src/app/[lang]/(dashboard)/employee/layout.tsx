@@ -16,7 +16,7 @@ const Layout = async ({ children, params }: LayoutProps) => {
 
 	return (
 		<>
-			<Navbar lang={lang} navbar={page.navbar} />
+			<Navbar lang={lang} translate={page.navbar} />
 			<main>{children}</main>
 		</>
 	);
