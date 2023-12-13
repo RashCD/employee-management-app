@@ -7,6 +7,7 @@ import { convertImage, toBase64 } from '@/helpers/image';
 import { usePathname } from 'next/navigation';
 import logo from '@/app/assets/logo.svg';
 import { Locale } from '@/i18n.config';
+import LocaleSwitcher from './LocaleSwitcher';
 
 type NavbarProps = {
 	lang: Locale;
@@ -70,6 +71,9 @@ const Navbar = ({ translate, lang }: NavbarProps) => {
 						{link.name}
 					</Link>
 				))}
+				<div className="flex flex-1 justify-end">
+					<LocaleSwitcher />
+				</div>
 			</nav>
 		</>
 	);
