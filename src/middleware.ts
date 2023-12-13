@@ -24,6 +24,12 @@ export function middleware(request: NextRequest) {
 	// Redirect if there is no locale
 	if (pathnameIsMissingLocale) {
 		const locale = getLocale(request);
+
+		// Redirect to '/employee' if the user goes to '/'
+		if (pathname === '/') {
+			return NextResponse.redirect(new URL(`/${locale}/employee`, request.url));
+		}
+
 		return NextResponse.redirect(
 			new URL(
 				`/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`,
@@ -42,6 +48,6 @@ export const config = {
 		 * - _next/image (image optimization files)
 		 * - favicon.ico (favicon file)
 		 */
-		'/((?!api|_next/static|_next/image|assets|favicon.ico).*)',
+		'/((?!api|_next/static|_next/image|images|icon|assets|favicon.ico).*)',
 	],
 };
