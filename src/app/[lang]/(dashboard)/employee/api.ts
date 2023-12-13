@@ -10,7 +10,7 @@ export interface Users {
 }
 
 export interface Employee {
-	id: number;
+	id?: number;
 	email: string;
 	firstName: string;
 	lastName: string;
@@ -23,11 +23,7 @@ export interface Support {
 }
 
 export const getEmployeeList = async (): Promise<Users> => {
-	const res = await fetch('https://reqres.in/api/users', {
-		next: {
-			revalidate: 0,
-		},
-	});
+	const res = await fetch('https://reqres.in/api/users');
 
 	const result = await res.json();
 

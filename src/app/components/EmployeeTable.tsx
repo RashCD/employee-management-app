@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import {
 	TableContainer,
@@ -7,31 +9,79 @@ import {
 	TableRow,
 	TableCell,
 	TableBody,
-	SxProps,
-	Theme,
+	Avatar,
+	Box,
 } from '@mui/material';
 import { Employee } from '../[lang]/(dashboard)/employee/api';
+import { useEmployeesContext } from '@/hooks/useEmployeeData';
+import ActionButtons from './ActionButtons';
+import { Locale } from '@/i18n.config';
 
-type Structure =
-	| {
-			header: string;
-			row: string;
-			parentStyle?: SxProps<Theme>;
-			customRow?: never;
-	  }
-	| {
-			header: string;
-			row?: never;
-			parentStyle?: SxProps<Theme>;
-			customRow: (row: Employee) => JSX.Element;
-	  };
-
-type EmployeeTableType = {
-	structure: Structure[];
-	dataSources: any[];
+type EmployeeTableProps = {
+	lang: Locale;
+	translate: {
+		avatar: string;
+		firstName: string;
+		lastName: string;
+		email: string;
+		action: string;
+		edit: string;
+		delete: string;
+	};
 };
 
-const EmployeeTable = ({ structure, dataSources }: EmployeeTableType) => {
+const EmployeeTable = ({ lang, translate }: EmployeeTableProps) => {
+	const employees = useEmployeesContext((state) => state.employees);
+
+	const structure = [
+		{
+			header: translate.avatar,
+			customRow: (row: Employee) => (
+				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					<Avatar alt={String(row.id)} src={row.avatar} />
+				</Box>
+			),
+		},
+		{
+			header: translate.firstName,
+			parentStyle: {
+				width: '70%',
+				textAlign: 'center',
+			},
+			customRow: (row: Employee) => (
+				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					{row.firstName.length > 25
+						? row.firstName.slice(0, 25) + '...'
+						: row.firstName}
+				</Box>
+			),
+		},
+		{
+			header: translate.lastName,
+			parentStyle: {
+				width: '70%',
+				textAlign: 'center',
+			},
+			customRow: (row: Employee) => (
+				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					{row.lastName.length > 25
+						? row.lastName.slice(0, 25) + '...'
+						: row.lastName}
+				</Box>
+			),
+		},
+		{
+			header: translate.email,
+			row: 'email',
+		},
+		{
+			header: translate.action,
+			customRow: (row: Employee) => (
+				<ActionButtons employee={row} lang={lang} translate={translate} />
+			),
+		},
+	];
+
 	return (
 		<TableContainer component={Paper}>
 			<Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -45,14 +95,16 @@ const EmployeeTable = ({ structure, dataSources }: EmployeeTableType) => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{dataSources.map((row) => (
+					{employees.map((row) => (
 						<TableRow
 							key={row.id}
 							sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 						>
 							{structure.map((column) => (
 								<TableCell key={column.header} sx={column.parentStyle}>
-									{column.customRow ? column.customRow(row) : row[column.row]}
+									{column.customRow
+										? column.customRow(row)
+										: row[column.row as keyof Employee]}
 								</TableCell>
 							))}
 						</TableRow>

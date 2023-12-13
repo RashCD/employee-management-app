@@ -5,8 +5,9 @@ import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import CustomTextField from './CustomTextField';
 import { useRouter } from 'next/navigation';
-import { decamelizeKeys } from 'humps';
 import CustomUploadField from './CustomUploadField';
+import { useEmployeesContext } from '@/hooks/useEmployeeData';
+import { Locale } from '@/i18n.config';
 
 type TranslateType = {
 	title: string;
@@ -28,6 +29,7 @@ type EmployeeDetailsFormProps = {
 	title?: string;
 	initialValues?: EmployeeDetailsFormType;
 	translate: TranslateType;
+	lang: Locale;
 };
 
 export type EmployeeDetailsFormType = {
@@ -45,11 +47,16 @@ const defaultValues: EmployeeDetailsFormType = {
 const EmployeeDetailsForm = ({
 	initialValues = defaultValues,
 	translate,
+	lang,
 }: EmployeeDetailsFormProps) => {
 	const { control, handleSubmit, reset } = useForm<EmployeeDetailsFormType>({
 		mode: 'onChange',
 		defaultValues,
 	});
+
+	const editOneEmployee = useEmployeesContext((state) => state.editOneEmployee);
+
+	const addOneEmployee = useEmployeesContext((state) => state.addOneEmployee);
 
 	const router = useRouter();
 
@@ -58,26 +65,13 @@ const EmployeeDetailsForm = ({
 	}, [initialValues, reset]);
 
 	const onSubmit = async (data: EmployeeDetailsFormType) => {
-		const serverPayload = decamelizeKeys(data);
-
-		const res = await fetch(
-			initialValues.id
-				? `https://reqres.in/api/users/${initialValues.id}`
-				: 'https://reqres.in/api/users',
-			{
-				method: data.id ? 'PATCH' : 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(serverPayload),
-				credentials: 'include',
-			}
-		);
-
-		if (res.status === 200 || res.status === 201) {
-			router.push('/employee/list');
-			router.refresh();
+		if (data?.id) {
+			editOneEmployee(data.id, data);
+		} else {
+			addOneEmployee(data);
 		}
+
+		return router.push(`/${lang}/employee/list`);
 	};
 
 	return (
@@ -99,8 +93,7 @@ const EmployeeDetailsForm = ({
 					control={control}
 					render={({ field, fieldState }) => (
 						<CustomUploadField
-							customRef={field.ref}
-							value={field.value}
+							{...field}
 							error={fieldState.invalid}
 							errorMessage={fieldState.error?.message}
 							translate={{ upload: translate?.upload || 'Upload' }}

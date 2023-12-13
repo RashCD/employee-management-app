@@ -3,10 +3,10 @@ import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
 import React from 'react';
 
-const page = async ({ params }: { params: { lang: Locale } }) => {
+const Page = async ({ params }: { params: { lang: Locale } }) => {
 	const { page } = await getDictionary(params.lang);
 
-	return <EmployeeDetailsForm translate={page.form} />;
+	return <EmployeeDetailsForm lang={params.lang} translate={page.form} />;
 };
 
-export default page;
+export default Page;

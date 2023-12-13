@@ -16,7 +16,7 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 type CustomUploadFieldProps = {
-	customRef: React.Ref<HTMLInputElement>;
+	onChange: (file: string) => void;
 	value: string;
 	error: boolean;
 	errorMessage?: string;
@@ -25,13 +25,22 @@ type CustomUploadFieldProps = {
 	};
 };
 
-const CustomUploadField = ({
-	customRef,
-	value,
-	error,
-	errorMessage,
-	translate,
-}: CustomUploadFieldProps) => {
+const CustomUploadField = React.forwardRef<
+	HTMLInputElement,
+	CustomUploadFieldProps
+>(({ value, onChange, error, errorMessage, translate }, ref) => {
+	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const file = event.target.files?.[0];
+
+		if (file) {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => {
+				onChange(reader.result as string);
+			};
+		}
+	};
+
 	return (
 		<Button
 			component="label"
@@ -45,7 +54,12 @@ const CustomUploadField = ({
 		>
 			<Stack>
 				<Avatar src={value} sx={{ my: 1, width: 56, height: 56 }} />
-				<VisuallyHiddenInput ref={customRef} type="file" />
+				<VisuallyHiddenInput
+					ref={ref}
+					type="file"
+					accept={'image/png, image/jpg, image/jpeg'}
+					onChange={handleFileChange}
+				/>
 				<Typography variant="body2" sx={{ textAlign: 'center', opacity: 0 }}>
 					{translate.upload}
 				</Typography>
@@ -53,6 +67,8 @@ const CustomUploadField = ({
 			</Stack>
 		</Button>
 	);
-};
+});
+
+CustomUploadField.displayName = 'CustomUploadField';
 
 export default CustomUploadField;

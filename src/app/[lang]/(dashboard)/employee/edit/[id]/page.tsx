@@ -12,7 +12,7 @@ type PageProps = {
 const Page = async ({ params }: PageProps) => {
 	const { page } = await getDictionary(params.lang);
 
-	return <EditDetailWithId translate={page.form} />;
+	return <EditDetailWithId lang={params.lang} translate={page.form} />;
 };
 
 export default Page;

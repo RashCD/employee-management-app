@@ -2,10 +2,12 @@
 
 import EmployeeDetailsForm from '@/app/components/EmployeeDetailsForm';
 import { useEmployeeData } from '@/hooks/useEmployeeData';
+import { Locale } from '@/i18n.config';
 import { useParams } from 'next/navigation';
 import React from 'react';
 
 type EditDetailWithIdProps = {
+	lang: Locale;
 	translate: {
 		title: string;
 		submit: string;
@@ -23,13 +25,14 @@ type EditDetailWithIdProps = {
 	};
 };
 
-const EditDetailWithId = ({ translate }: EditDetailWithIdProps) => {
+const EditDetailWithId = ({ translate, lang }: EditDetailWithIdProps) => {
 	const employeeData = useEmployeeData();
 
 	const params = useParams();
 
 	return (
 		<EmployeeDetailsForm
+			lang={lang}
 			translate={translate}
 			initialValues={{
 				id: +params.id,

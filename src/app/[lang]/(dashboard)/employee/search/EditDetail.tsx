@@ -3,12 +3,10 @@
 import { Box, Button, Stack, TextField } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import { Employee } from '../api';
-import { useEmployeeData } from '@/hooks/useEmployeeData';
+import { useEmployeeData, useEmployeesContext } from '@/hooks/useEmployeeData';
 import { Locale } from '@/i18n.config';
 
 type EditDetailProps = {
-	employees: Employee[];
 	lang: Locale;
 	translate: {
 		id: string;
@@ -16,10 +14,12 @@ type EditDetailProps = {
 	};
 };
 
-const EditDetail = ({ employees, lang, translate }: EditDetailProps) => {
+const EditDetail = ({ lang, translate }: EditDetailProps) => {
 	const router = useRouter();
 
 	const { addEmployee } = useEmployeeData();
+
+	const employees = useEmployeesContext((state) => state.employees);
 
 	const [searchId, setSearchId] = useState('');
 
